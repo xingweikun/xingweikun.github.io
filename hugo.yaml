@@ -5,11 +5,10 @@ title: 数据攻城小狮子的博客  # 网站标题（中文）
 theme: PaperMod  # 使用PaperMod主题
 
 outputs:
-  home:
-    - HTML
-    - RSS
-    - JSON # 生成搜索所需的JSON索引文件
-
+  home: [HTML, RSS, JSON]
+  section: [HTML]
+  taxonomy: [HTML]
+  term: [HTML]
 # 构建配置
 enableRobotsTXT: true  # 启用robots.txt
 buildDrafts: false     # 不包含草稿文章
@@ -18,8 +17,12 @@ buildExpired: false    # 不包含过期文章
 
 # 压缩配置
 minify:
-  disableXML: true     # 不压缩XML文件
+  disableXML: false     # 压缩XML文件
   minifyOutput: true   # 启用输出压缩
+# 资源指纹（缓存优化）
+assetDir: "assets"
+enableResourceCacheBusters: true
+
 # 核心参数配置
 params:
   author: 数据攻城小狮子        # 作者名称（中文）
@@ -28,17 +31,18 @@ params:
   disableThemeToggle: false  # 允许主题切换
   # 内容展示设置
   ShowCodeCopyButtons: true # 添加一个 copy 按钮到代码块中，以复制其中包含的代码
-  ShowReadingTime: true    # 显示阅读时间
   ShowBreadCrumbs: true    # 显示面包屑导航
   ShowPostNavLinks: true   # 显示文章导航
-  ShowWordCount: true      # 显示字数统计
   UseHugoToc: true         # 使用Hugo内置目录
   disableHLJS: false  # 是否禁用代码高亮
   comments: false # 是否启用评论功能
   hidemeta: false # 是否隐藏文章元数据（作者、日期等）
   showToc: true # 是否显示文章目录
   TocOpen: false # 文章目录是否默认展开
-
+  ShowReadingProgress: true # 添加阅读进度条
+  ShowRelatedPosts: true # 相关文章推荐
+  RelatedPostsCount: 3
+  
   # 社交链接（可根据需要修改）
   # socialIcons:
   #   - name: github
@@ -56,47 +60,62 @@ params:
     enabled: true
     title: "数据攻城小狮子" 
     subtitle: "探索编程世界"
-    imageUrl: "/images/avatar.jpg" 
+    imageUrl: "/images/avatar.png" 
     imageTitle: "博主头像" 
     imageWidth: 120 
     imageHeight: 120 
     buttons:
-      - name: 文章归档
-        url: "/archives"
       - name: CSDN
         url: "https://blog.csdn.net/weixin_46322367"
-      - name: 关于
-        url: "/about/"
   # 归档布局自定义
   archivesLayout:
     showCount: true      # 显示文章总数
     dateFormat: "2006年01月" # 日期显示格式
     showTaxonomies: true # 显示分类/标签云
+      
+  # 字体设置
+  font:
+    body: "LXGW WenKai Screen"  # 霞鹜文楷
+    code: "JetBrains Mono"
+    
+  # 布局调整
+  homeInfoParams: 
+    Title: "欢迎来到技术世界"
+    Content: "这里分享数据科学与编程经验"
+    
+  # 代码块样式增强
+  code:
+    copy: true          # 显示复制按钮
+    maxShownLines: 30   # 折叠长代码块
+
 
 # 菜单配置（中文显示）
 menu:
   main:
-    - identifier: search
-      name: 搜索
-      url: /search/
+    - identifier: posts
+      name: 文章
+      url: /posts/
       weight: 1
-    - identifier: categories
-      name: 分类
-      url: /categories/
-      weight: 2
-    - identifier: tags
-      name: 标签
-      url: /tags/
-      weight: 3
-    - identifier: about
-      name: 关于
-      url: /about/
-      weight: 4
     - identifier: archives
       name: 归档
       url: /archives/
+      weight: 2
+    - identifier: search
+      name: 搜索
+      url: /search/
+      weight: 3
+    - identifier: categories
+      name: 分类
+      url: /categories/
+      weight: 4
+    - identifier: tags
+      name: 标签
+      url: /tags/
       weight: 5
-
+    - identifier: about
+      name: 关于
+      url: /about/
+      weight: 6
 # 语法高亮配置
 pygmentsUseClasses: true
 markup:

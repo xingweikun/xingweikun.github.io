@@ -1,0 +1,21 @@
+/* 增强可读性 */
+.post-content {
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+/* 代码块样式优化 */
+div.highlight {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  .post-title {
+    font-size: 1.8rem;
+  }
+  .toc {
+    display: none; /* 移动端隐藏目录 */
+  }
+}
